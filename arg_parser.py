@@ -1,7 +1,7 @@
 import argparse
 
 
-def parse_args():
+def parse_args(args=None):
     parser = argparse.ArgumentParser(
         description='Fetch and Analyze Currency Data'
         )
@@ -13,4 +13,4 @@ def parse_args():
         help='Number of days of historical data to fetch'
         )
 
-    return parser.parse_args()
+    return parser.parse_args(args)

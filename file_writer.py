@@ -40,8 +40,16 @@ class FileWriter:
                         daily_roc = data['roc'][i-1]
 
                     # Moving averages
-                    ma7 = data['ma_short'][i] if i < len(data['ma_short']) else ''
-                    ma30 = data['ma_long'][i] if i < len(data['ma_long']) else ''
+                    ma7 = (
+                        data['ma_short'][i]
+                        if i < len(data['ma_short'])
+                        else ''
+                    )
+                    ma30 = (
+                        data['ma_long'][i]
+                        if i < len(data['ma_long'])
+                        else ''
+                    )
 
                     # Summary metrics
                     volatility = data['volatility']
@@ -63,7 +71,9 @@ class FileWriter:
                     ])
 
     @staticmethod
-    def generate_pdf(currency_data, days, filename="output/currency_report.pdf"):
+    def generate_pdf(currency_data,
+                     days,
+                     filename="output/currency_report.pdf"):
         pdf = FPDF()
         pdf.add_page()
         pdf.set_font("Arial", 'B', 16)
