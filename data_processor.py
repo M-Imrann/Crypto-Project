@@ -5,6 +5,14 @@ from config import CURRENCIES
 class DataProcessor:
     @staticmethod
     def calculate_volatility(rates):
+        """
+        This will calculate the volatility of each currency.
+
+        Args:
+        rates: rates of the currencies
+
+        return: Return the volatility(standard deviation)
+        """
         n = len(rates)
         if n < 2:
             return 0.0
@@ -14,12 +22,28 @@ class DataProcessor:
 
     @staticmethod
     def calculate_performance(rates):
+        """
+        This will calculate the performance of currencies.
+
+        Args:
+        rates: rates of the currencies
+
+        return: Return the performance
+        """
         if not rates or rates[0] == 0:
             return 0.0
         return ((rates[-1] - rates[0]) / rates[0]) * 100.0
 
     @staticmethod
     def calculate_roc(rates):
+        """
+        This will calculate the rate of change of each currency.
+
+        Args:
+        rates: rates of the currencies
+
+        return: Return the list of rate of change
+        """
         roc = []
         for i in range(1, len(rates)):
             if rates[i-1] != 0:
@@ -31,6 +55,15 @@ class DataProcessor:
 
     @staticmethod
     def calculate_moving_average(rates, window):
+        """
+        This will calculate the moving average of each currency.
+
+        Args:
+        rates: rates of the currencies
+        window: no. of days for finding moving average
+
+        return: Return the list of moving average
+        """
         ma = []
         for i in range(len(rates)):
             start = max(0, i - window + 1)
@@ -43,6 +76,15 @@ class DataProcessor:
 
     @staticmethod
     def process_currency_data(data, days):
+        """
+        This will process the currency data.
+
+        Args:
+        data: A dictionary of currency rates
+        days: Number of days of which data is available
+
+        return: It will return dates and calculated results. 
+        """
         dates = sorted({d['meta']['last_updated_at'][:10] for d in data})
         currencies = {c: [] for c in CURRENCIES}
 

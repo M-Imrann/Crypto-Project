@@ -4,11 +4,17 @@ from config import API_KEY, CURRENCIES, BASE_URL
 
 
 class CurrencyAPIClient:
+    """
+    CurrencyAPIClient class is to fetch the historical and latest data.
+    """
     def __init__(self, api_key=API_KEY):
         self.api_key = api_key
         self.cache = {}
 
     def _fetch_data(self, endpoint, date=None):
+        """
+        This function is to fetch the data.
+        """
         cache_key = f"{endpoint}-{date}" if date else endpoint
         if cache_key in self.cache:
             return self.cache[cache_key]
@@ -31,6 +37,14 @@ class CurrencyAPIClient:
             return None
 
     def get_historical_data(self, days):
+        """
+        This function is to get historical data.
+
+        Args:
+        days: Number of days of which we want to fetch data.
+
+        return: Return the list of collected data.
+        """
         collected_data = []
         distinct_dates = set()
         current_date = datetime.now() - timedelta(days=1)

@@ -4,12 +4,14 @@ import main
 
 
 class TestMain(unittest.TestCase):
-    @patch("main.get_args")
+    """
+    Test class to test the main function.
+    """
+    @patch("main.parse_args")
     @patch("main.CurrencyAPIClient")
     @patch("main.DataProcessor")
-    @patch("main.FileWriter")
     def test_main_success(self, mock_processor, mock_client, mock_args):
-        mock_args.retturn_value = MagicMock(days=2)
+        mock_args.return_value = MagicMock(days=2)
         mock_client.return_value.get_historical_data.return_value = [
             {
                 "meta": {"last_updated_at": "2025-07-24T12:00:00Z"},
@@ -31,7 +33,7 @@ class TestMain(unittest.TestCase):
         with patch("builtins.print"):
             main.main()
 
-    @patch("main.get_args")
+    @patch("main.parse_args")
     @patch("main.CurrencyAPIClient")
     def test_main_no_data(self, mock_client, mock_args):
         mock_args.return_value = MagicMock(days=2)

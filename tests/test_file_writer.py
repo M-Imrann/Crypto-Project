@@ -4,6 +4,9 @@ from file_writer import FileWriter
 
 
 class TestFileWriter(unittest.TestCase):
+    """
+    Test Class to test the file export functions.
+    """
     def setUp(self):
         self.currency_data = {
             "USD": {
@@ -20,6 +23,9 @@ class TestFileWriter(unittest.TestCase):
 
     @patch("builtins.open", new_callable=mock_open)
     def test_write_comprehensive_csv(self, mock_file):
+        """
+        Test case to test the csv function that generates csv file.
+        """
         FileWriter.write_comprehensive_csv(
             self.dates,
             self.currency_data,
@@ -28,10 +34,10 @@ class TestFileWriter(unittest.TestCase):
         mock_file.assert_called_with("test.csv", "w", newline='')
 
     @patch("file_writer.FPDF.output")
-    @patch("file_writer.FPDF.add_page")
-    @patch("file_writer.FPDF.cell")
-    @patch("file_writer.FPDF.set_font")
     def test_generate_pdf(self, mock_output):
+        """
+        Test case to test the generate pdf function that generated pdf.
+        """
         FileWriter.generate_pdf(
             self.currency_data,
             2,
